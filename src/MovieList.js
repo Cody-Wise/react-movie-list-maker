@@ -6,12 +6,9 @@ export default function MovieList(props) {
     <div className="list">
       {props.allMovies.map((movie, i) => (
         <Movie
-          key={`${props.movieFormTitle}-${props.movieFormYearReleased}-${i}`}
-          title={movie.movieFormTitle}
-          year={movie.movieFormYearReleased}
-          director={movie.movieFormDirector}
-          posterColor={movie.movieFormColor}
+          key={`${movie.title}-${movie.Year}-${i}`}
           handleDeleteMovie={props.handleDeleteMovie}
+          movie={movie}
         />
       ))}
     </div>

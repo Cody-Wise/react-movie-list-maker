@@ -17,7 +17,6 @@ export default function MovieList(props) {
       Director: props.movieFormDirector,
       Color: props.movieFormColor,
     };
-
     props.setAllMovies([...props.allMovies, newMovie]);
     props.setMovieFormTitle('');
     props.setMovieFormYearReleased('');

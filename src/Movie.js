@@ -1,16 +1,15 @@
 import React from 'react';
 
-export default function Movie(props) {
+export default function Movie({ movie, handleDeleteMovie }) {
   return (
     <div
-      onClick={() => props.handleDeleteMovie(props.movieFormTitle)}
+      onClick={() => handleDeleteMovie(movie.movieFormTitle)}
       className="movie-poster"
-      style={{ background: props.movieFormColor }}
+      style={{ backgroundColor: movie.Color }}
     >
-      <h3>props.movieFormTitle</h3>
-      <p>props.movieFormYearReleased</p>
-      <p>props.movieFormDirector</p>
-      <p>props.movieFormColor</p>
+      <h3>{movie.title}</h3>
+      <p>{movie.Year}</p>
+      <p>{movie.Director}</p>
     </div>
   );
 }

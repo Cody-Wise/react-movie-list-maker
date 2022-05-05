@@ -10,7 +10,8 @@ function App() {
   const [movieFormYearReleased, setMovieFormYearReleased] = useState('');
   const [movieFormDirector, setMovieFormDirector] = useState('');
   const [movieFormTitle, setMovieFormTitle] = useState('');
-  const [movieFormColor, setMovieFormColor] = useState('');
+  const [movieFormColor, setMovieFormColor] = useState('red');
+  const [queryFilter, setQueryFilter] = useState('');
 
   function handleDeleteMovie(title) {
     const indexToRemove = allMovies.findIndex((movie) => movie.title === title);
@@ -20,16 +21,18 @@ function App() {
     setAllMovies(...allMovies);
   }
 
-  function handleFilterMovies(search) {
-    if (search) {
+  function handleFilterMovies() {
+    if (queryFilter) {
       const matchingMovies = allMovies.filter((movie) =>
-        movie.title.toLowerCase().includes(search.toLowerCase())
+        movie.title.toLowerCase().includes(queryFilter.toLowerCase())
       );
       setFilteredMovies([matchingMovies]);
     } else {
       setFilteredMovies([allMovies]);
     }
   }
+
+  useEffect(handleFilterMovies, [queryFilter]); //eslint-disable-line
 
   return (
     <div className="App">
@@ -40,22 +43,34 @@ function App() {
           setMovieFormTitle={setMovieFormTitle}
           movieFormDirector={movieFormDirector}
           setMovieFormColor={setMovieFormColor}
+          setMovieFormDirector={setMovieFormDirector}
+          allMovies={allMovies}
+          setAllMovies={setAllMovies}
+          movieFormColor={movieFormColor}
+          movieFormYearReleased={movieFormYearReleased}
         />
 
         {movieFormTitle || movieFormYearReleased ? (
           <Movie
-            movieFormTitle={movieFormTitle}
-            movieFormYearReleased={movieFormYearReleased}
-            movieFormColor={movieFormColor}
+            movie={{
+              title: movieFormTitle,
+              Year: movieFormYearReleased,
+              Director: movieFormDirector,
+              Color: movieFormColor,
+            }}
+            handleDeleteMovie={() => handleDeleteMovie()}
           />
         ) : (
           <div>Type to show preview</div>
         )}
 
-        <MovieList allMovies={allMovies} handleDeleteMovie={handleDeleteMovie} />
+        <MovieList
+          allMovies={filteredMovies.length ? filteredMovies : allMovies}
+          handleDeleteMovie={handleDeleteMovie}
+        />
         <div className="filter">
           Filter Movies
-          <input onChange={(e) => handleFilterMovies(e.target.value)} />
+          <input onChange={(e) => setQueryFilter(e.target.value)} />
         </div>
       </header>
     </div>
