@@ -18,21 +18,17 @@ function App() {
 
     allMovies.splice(indexToRemove, 1);
 
-    setAllMovies(...allMovies);
+    setAllMovies([...allMovies]);
   }
 
   function handleFilterMovies() {
-    if (queryFilter) {
-      const matchingMovies = allMovies.filter((movie) =>
-        movie.title.toLowerCase().includes(queryFilter.toLowerCase())
-      );
-      setFilteredMovies([matchingMovies]);
-    } else {
-      setFilteredMovies([allMovies]);
-    }
+    const matchingMovies = allMovies.filter((movie) =>
+      movie.title.toLowerCase().includes(queryFilter.toLowerCase())
+    );
+    setFilteredMovies([...matchingMovies]);
   }
 
-  useEffect(handleFilterMovies, [queryFilter]); //eslint-disable-line
+  useEffect(handleFilterMovies, [queryFilter, allMovies]); //eslint-disable-line
 
   return (
     <div className="App">
