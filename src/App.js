@@ -1,32 +1,43 @@
 import './App.css';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import MovieForm from './MovieForm';
 import MovieList from './MovieList';
 import Movie from './Movie';
+import { useMovieForm } from './useMovieForm';
 
 function App() {
-  const [allMovies, setAllMovies] = useState([]);
-  const [filteredMovies, setFilteredMovies] = useState(allMovies);
-  const [movieFormYearReleased, setMovieFormYearReleased] = useState('');
-  const [movieFormDirector, setMovieFormDirector] = useState('');
-  const [movieFormTitle, setMovieFormTitle] = useState('');
-  const [movieFormColor, setMovieFormColor] = useState('red');
-  const [queryFilter, setQueryFilter] = useState('');
+  const {
+    allMovies,
+    setAllMovies,
+    filteredMovies,
+    movieFormYearReleased,
+    setMovieFormYearReleased,
+    movieFormDirector,
+    setMovieFormDirector,
+    movieFormTitle,
+    setMovieFormTitle,
+    movieFormColor,
+    setMovieFormColor,
+    queryFilter,
+    setQueryFilter,
+    handleDeleteMovie,
+    handleFilterMovies,
+  } = useMovieForm();
 
-  function handleDeleteMovie(title) {
-    const indexToRemove = allMovies.findIndex((movie) => movie.title === title);
+  // function handleDeleteMovie(title) {
+  //   const indexToRemove = allMovies.findIndex((movie) => movie.title === title);
 
-    allMovies.splice(indexToRemove, 1);
+  //   allMovies.splice(indexToRemove, 1);
 
-    setAllMovies([...allMovies]);
-  }
+  //   setAllMovies([...allMovies]);
+  // }
 
-  function handleFilterMovies() {
-    const matchingMovies = allMovies.filter((movie) =>
-      movie.title.toLowerCase().includes(queryFilter.toLowerCase())
-    );
-    setFilteredMovies([...matchingMovies]);
-  }
+  // function handleFilterMovies() {
+  //   const matchingMovies = allMovies.filter((movie) =>
+  //     movie.title.toLowerCase().includes(queryFilter.toLowerCase())
+  //   );
+  //   setFilteredMovies([...matchingMovies]);
+  // }
 
   useEffect(handleFilterMovies, [queryFilter, allMovies]); //eslint-disable-line
 
@@ -60,14 +71,14 @@ function App() {
           <div>Type to show preview</div>
         )}
 
-        <MovieList
-          allMovies={filteredMovies.length ? filteredMovies : allMovies}
-          handleDeleteMovie={handleDeleteMovie}
-        />
         <div className="filter">
           Filter Movies
           <input onChange={(e) => setQueryFilter(e.target.value)} />
         </div>
+        <MovieList
+          allMovies={filteredMovies.length ? filteredMovies : allMovies}
+          handleDeleteMovie={handleDeleteMovie}
+        />
       </header>
     </div>
   );
