@@ -1,5 +1,5 @@
 import './App.css';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import MovieForm from './MovieForm';
 import MovieList from './MovieList';
 import Movie from './Movie';
@@ -18,10 +18,9 @@ function App() {
     setMovieFormTitle,
     movieFormColor,
     setMovieFormColor,
-    queryFilter,
     setQueryFilter,
     handleDeleteMovie,
-    handleFilterMovies,
+    useEffect,
   } = useMovieForm();
 
   // function handleDeleteMovie(title) {
@@ -39,7 +38,7 @@ function App() {
   //   setFilteredMovies([...matchingMovies]);
   // }
 
-  useEffect(handleFilterMovies, [queryFilter, allMovies]); //eslint-disable-line
+  useEffect; //eslint-disable-line
 
   return (
     <div className="App">

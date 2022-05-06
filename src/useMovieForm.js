@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export function useMovieForm() {
   const [allMovies, setAllMovies] = useState([]);
@@ -24,6 +24,8 @@ export function useMovieForm() {
     setFilteredMovies([...matchingMovies]);
   }
 
+  useEffect(handleFilterMovies, [queryFilter, allMovies]);
+
   return {
     allMovies,
     setAllMovies,
@@ -41,5 +43,6 @@ export function useMovieForm() {
     setQueryFilter,
     handleDeleteMovie,
     handleFilterMovies,
+    useEffect,
   };
 }
