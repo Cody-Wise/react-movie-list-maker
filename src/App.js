@@ -23,22 +23,7 @@ function App() {
     useEffect,
   } = useMovieForm();
 
-  // function handleDeleteMovie(title) {
-  //   const indexToRemove = allMovies.findIndex((movie) => movie.title === title);
-
-  //   allMovies.splice(indexToRemove, 1);
-
-  //   setAllMovies([...allMovies]);
-  // }
-
-  // function handleFilterMovies() {
-  //   const matchingMovies = allMovies.filter((movie) =>
-  //     movie.title.toLowerCase().includes(queryFilter.toLowerCase())
-  //   );
-  //   setFilteredMovies([...matchingMovies]);
-  // }
-
-  useEffect; //eslint-disable-line
+  useEffect;
 
   return (
     <div className="App">
